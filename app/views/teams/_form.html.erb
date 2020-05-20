@@ -1,0 +1,52 @@
+<%= form_with(model: team) do |form| %>
+
+  <ul class="nav nav-tabs nav-fill" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="team-add-details-tab" data-toggle="tab" href="#team-add-details" role="tab" aria-controls="team-add-details" aria-selected="true">Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="team-add-members-tab" data-toggle="tab" href="#team-add-members" role="tab" aria-controls="team-add-members" aria-selected="false">Members</a>
+    </li>
+  </ul>
+
+  <div class="modal-body">
+    
+    <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+      <ul>
+        <% team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    
+    <div class="tab-content">
+      <div class="tab-pane fade active show" id="team-add-details" role="tabpanel">
+        <h6>General Details</h6>
+        <div class="form-group row align-items-center">
+          <%= form.label :name, :class => "col-3" %>
+          <%= form.text_field :name, :class => "form-control col", :placeholder => "Team name" %>
+        </div>
+        <div class="form-group row">
+          <%= form.label :description, :class => "col-3" %>
+          <%= form.text_area :description, :class => "form-control col", :placeholder => "Team description", :rows => "3" %>
+        </div>
+        <div class="form-group row align-items-center">
+          <%= form.label :parent, :class => "col-3" %>
+          <%= form.collection_select :parent_id, @teams_tree, :id, :name_for_selects, { include_blank: true }, { class: "form-control col" } %>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="team-add-members" role="tabpanel">
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <%= form.submit "Save changes", :class => "btn btn-primary" %>
+  </div>
+
+<% end %>

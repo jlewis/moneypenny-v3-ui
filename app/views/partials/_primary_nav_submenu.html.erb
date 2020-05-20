@@ -1,0 +1,10 @@
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-<%= object[:id] %>" aria-controls="submenu-<%= object[:id] %>"><%= object[:name] %></a>
+  <div id="submenu-<%= object[:id] %>" class="collapse" style="">
+    <ul class="nav nav-small flex-column">
+      <% children.each do |object, children| %>
+        <%= render partial: '/partials/primary_nav_item', locals: { object: object } %>
+      <% end %>
+    </ul>
+  </div>
+</li>

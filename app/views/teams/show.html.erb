@@ -1,0 +1,49 @@
+<div class="col-lg-12 col-xl-12">
+  <div class="page-header">
+    <h1><%= @team.name %></h1>
+    <p class="lead"><%= @team.description %></p>
+    <p id="notice"><%= notice %></p>
+  </div>
+  <hr>
+  <ul class="nav nav-tabs nav-fill" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="true">Report</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#people" role="tab" aria-controls="people" aria-selected="false">People</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#projects" role="tab" aria-controls="projects" aria-selected="false">Projects</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <%= render partial: '/teams/report/index' %>
+    <%= render partial: '/teams/people/index' %>
+    <%= render partial: '/teams/projects/list' %>
+  </div>
+</div>
+
+<% @team.ancestors.each do |t| %>
+  <%= t.name %>
+<% end %>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTeamModal">
+  Edit Team
+</button>
+
+<%= link_to 'Edit Team', edit_team_path(@team) %>
+
+<!-- Edit Team Modal -->
+<div class="modal fade" id="editTeamModal" tabindex="-1" role="dialog" aria-labelledby="editTeamModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editing Team</h5>
+        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+      <%= render 'form', team: @team %>
+    </div>
+  </div>
+</div>

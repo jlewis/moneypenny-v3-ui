@@ -1,0 +1,47 @@
+<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" id="navbar" data-turbolinks-permanent>
+
+  <a class="navbar-brand" href="/"><%= image_tag("piggy-bank.svg", alt: "Moneypenny") %></a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Instrument</a>
+      </li>
+      <% @nav_teams.each do |object, children| %>
+        <% if children.size > 0 %>
+          <%= render partial: '/partials/primary_nav_submenu', locals: { object: object, children: children } %>
+        <% else %>
+          <%= render partial: '/partials/primary_nav_item', locals: { object: object } %>
+        <% end %>
+      <% end %>
+    </ul>
+    <hr>
+    <% if @nav_disciplines.size > 0 %>
+    <ul class="navbar-nav mr-auto">
+      <% @nav_disciplines.each do |object| %>
+        <%= object.name %>
+      <% end %>
+    </ul>
+    <%end %>
+  </div>
+  
+  <% if user_signed_in? %>
+    <div class="d-none d-lg-block">
+      <div class="dropup">
+        <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag("avatar-male-4.jpg", alt: "Image", class: "avatar") %>
+        </a>
+        <div class="dropdown-menu">
+          <a href="nav-side-user.html" class="dropdown-item">Profile</a>
+          <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
+          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+</div>

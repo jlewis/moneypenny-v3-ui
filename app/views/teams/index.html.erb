@@ -1,0 +1,28 @@
+<div class="col-lg-12 col-xl-12">            
+  <div class="page-header">
+    <h1>Teams</h1>
+    <p class="lead"></p>
+    <p id="notice"><%= notice %></p>
+  </div>
+  <hr>
+  <div class="row content-list-head">
+    <div class="col-auto">
+      <button class="btn btn-round" data-toggle="modal" data-target="#team-add-modal">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
+    <form class="col-md-auto">
+      <div class="input-group input-group-round">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="material-icons">filter_list</i>
+          </span>
+        </div>
+        <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <% @teams.each do |team| %><%= render partial: 'team_card', locals: { team: team } %><% end %>
+</div>
